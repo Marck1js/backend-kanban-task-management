@@ -17,6 +17,22 @@ async function defaultData () {
         name: 'RoadMap'
     }).then( (e) => console.log(e.dataValues.name));
 
+    await board.create({
+        name: 'Developing Page'
+    }).then( (e) => console.log(e.dataValues.name));
+
+    await board.create({
+        name: 'Ar neuro'
+    }).then( (e) => console.log(e.dataValues.name));
+
+    await board.create({
+        name: 'Developing React Native'
+    }).then( (e) => console.log(e.dataValues.name));
+
+    await board.create({
+        name: 'RL Mandatarias'
+    }).then( (e) => console.log(e.dataValues.name));
+
  // Columns
     await column.create({
         name: 'Todo',
@@ -24,12 +40,27 @@ async function defaultData () {
     }).then( (e) => console.log(e.dataValues.name));
 
     await column.create({
-        name: 'Doing',
-        boardId: 1
+        name: 'Todo',
+        boardId: 5
     }).then( (e) => console.log(e.dataValues.name));
 
     await column.create({
+        name: 'Doing',
+        boardId: 2
+    }).then( (e) => console.log(e.dataValues.name));
+
+    await column.create({
+        name: 'Fixing',
+        boardId: 3
+    }).then( (e) => console.log(e.dataValues.name))
+
+    await column.create({
         name: 'Done',
+        boardId: 4
+    }).then( (e) => console.log(e.dataValues.name));
+
+    await column.create({
+        name: 'In revision',
         boardId: 1
     }).then( (e) => console.log(e.dataValues.name));
 
