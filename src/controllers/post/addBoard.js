@@ -12,12 +12,13 @@ const addBoard = async (req, res) => {
       });
     const data = await board.create({ name }).then((e) => e.id);
     console.log(data);
-    if (!columns.includes('')) {
+    if (columns.length >= 1 && !columns.includes('')) {
       // console.log(columns);
       await columns.forEach(async (name) => {
         await column.create({ name, boardId: data });
       });
 
+      
       let output = {
         status: "Ok",
         msg: "Board and Columns Created successfully",
