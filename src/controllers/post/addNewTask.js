@@ -15,7 +15,7 @@ const addNewTask = async(req,res)=>{
         title,
         description,
         status,
-        columnId: 1
+        columnId: 1 
     }).then(e => e.id)
     console.log(data);
 

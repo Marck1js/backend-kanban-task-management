@@ -1,29 +1,53 @@
-const {models} = require('../../db');
+const { Op } = require("sequelize");
+const { models } = require("../../db");
+const reemplazarGuionPorEspacio = require("../../helper/replaceSpace");
 
-let {task,subtask,column,board} = models;
-const getAllBoards = async(req,res)=>{
-    const results = await board.findAll({
-       include: [{ 
-        model: column, 
-        as: 'columns',
-        attributes: ['id','name'],
-        include: [{
+let { task, subtask, column, board } = models;
+const getAllBoards = async (req, res) => {
+  let { boards } = req.query;
+
+  if (!boards) {
+    return res.send({ msg: "Boards not recieved" });
+  }
+
+  const results = await board.findOne({
+    where: {
+      name: {
+        [Op.iLike]: reemplazarGuionPorEspacio(boards),
+      },
+    },
+    include: [
+      {
+        model: column,
+        as: "columns",
+        attributes: ["id", "name"],
+        include: [
+          {
             model: task,
-            as: 'tasks',
+            as: "tasks",
             attributes: {
-                exclude: ['columnId']
+              exclude: ["columnId"],
             },
-            include: [{
+            include: [
+              {
                 model: subtask,
-                as: 'subtasks',
+                as: "subtasks",
                 attributes: {
-                    exclude: ['taskId']
-                }    
-            }]
-        }]
-       }]
-    });
-    res.send(results)
-}
+                  exclude: ["taskId"],
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+
+  if (!results) {
+    return res.send({ msg: "Empty" });
+  }
+
+  res.send([results]);
+};
 
 module.exports = getAllBoards;
