@@ -1,7 +1,7 @@
-const { app } = require("./app");
+const { app } = require("./src/app");
 const PORT = process.env.PORT || 6500;
-const { server, models } = require("./db");
-const defaultData = require("./defaultData");
+const { server, models } = require("./src/db");
+const defaultData = require("./src/defaultData");
 
 let { column, task, subtask, board } = models;
 
