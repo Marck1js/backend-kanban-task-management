@@ -7,7 +7,9 @@ let {DBUSER,DBPASS,DBNAME,DBPORT} = process.env
 
 const sequelize = new Sequelize(`postgres://${DBUSER}:${DBPASS}@${DBPORT}/${DBNAME}`, {
     logging:  false,
+    dialect: 'postgres'
 });
+
 
 
 subtasks(sequelize);
